@@ -1,0 +1,26 @@
+@layer base {
+  input[type='number'] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+@layer components {
+  .form-input {
+    @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-800 transition-colors outline-none placeholder:text-slate-400;
+  }
+
+  .form-input:focus-visible {
+    @apply border-lime-500 ring-2 ring-lime-200;
+  }
+
+  .form-input:disabled {
+    @apply cursor-not-allowed bg-slate-100 text-slate-400;
+  }
+}

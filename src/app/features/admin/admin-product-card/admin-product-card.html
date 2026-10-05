@@ -1,0 +1,24 @@
+<app-product-card [product]="product()">
+  <div class="flex gap-2 px-3 pb-3">
+    <button
+      appButton
+      type="button"
+      variant="secondary"
+      size="sm"
+      class="flex-1"
+      (click)="edit.emit()"
+    >
+      Edit
+    </button>
+    <button
+      appButton
+      type="button"
+      variant="danger"
+      size="sm"
+      class="flex-1"
+      (click)="remove.emit()"
+    >
+      Delete
+    </button>
+  </div>
+</app-product-card>

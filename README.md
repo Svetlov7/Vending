@@ -1,8 +1,24 @@
-# VendingMachine
+# Vending Machine
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.1.
+An Angular app that simulates a vending machine. It has two parts:
 
-## Development server
+- **Vending machine** (`/vending`) – browse products, insert coins, buy, and get change.
+- **Admin panel** (`/admin`) – manage products: add, edit, and remove items, and set price and stock.
+
+## Tech stack
+
+- Angular 22 (standalone components, signals, lazy-loaded routes)
+- NgRx Signals for state (`ProductsStore`, `VendingStore`)
+- Tailwind CSS 4, class-variance-authority, Angular CDK
+- Vitest for unit tests, ESLint + Prettier
+
+## Getting started
+
+Requires Node.js (LTS) and npm.
+
+```bash
+npm install
+```
 
 To start a local development server, run:
 
@@ -10,50 +26,44 @@ To start a local development server, run:
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+or `npm start`. Once the server is running, open `http://localhost:4200/` (redirects to `/vending`; the admin panel is at `/admin`). The app reloads automatically when you change source files.
 
-## Code scaffolding
+## Scripts
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+| Command                | Description                   |
+| ---------------------- | ----------------------------- |
+| `npm start`            | Dev server with live reload   |
+| `npm run build`        | Production build into `dist/` |
+| `npm test`             | Unit tests (Vitest)           |
+| `npm run lint`         | ESLint                        |
+| `npm run format`       | Format code with Prettier     |
+| `npm run format:check` | Check formatting              |
 
-```bash
-ng generate component component-name
+## Business rules
+
+- Currency: EUR. Accepted coins: 0.10, 0.20, 0.50, 1.00, 2.00.
+- Prices are multiples of 0.10 (so change can always be given), up to 30.00.
+- Max stock per product: 15. Product title: 2–30 characters.
+- Change is returned with the fewest coins (greedy algorithm).
+
+Limits are configured in `src/app/core/config/vending.config.ts`.
+
+## Project structure
+
+```
+src/app/
+  core/      # API, config, models, utils, validators
+  features/
+    vending/ # vending machine UI (grid, payment, success modals)
+    admin/   # admin panel (product cards, forms, confirm modals)
+  shared/    # reusable UI, directives, pipes
+  state/     # NgRx signal stores
+public/
+  mock-api/products.json   # initial product data
+  assets/images/products/  # product images
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Notes
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Products are loaded from a static mock API (`public/mock-api/products.json`); there is no backend.
+- State is kept in memory only, so changes made in the admin panel are lost on page reload.

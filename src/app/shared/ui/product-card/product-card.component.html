@@ -1,0 +1,43 @@
+<article
+  class="group flex h-full w-full flex-col overflow-hidden rounded-md border border-gray-300 bg-white"
+>
+  <div
+    class="relative flex aspect-4/3 w-full items-center justify-center overflow-hidden p-2 sm:p-3"
+  >
+    @if (product().image && !imageFailed()) {
+      <img
+        class="max-h-full max-w-full object-contain mix-blend-multiply transition-transform duration-200 group-hover:scale-105"
+        [src]="product().image"
+        [alt]="product().title"
+        (error)="onImageError()"
+      />
+    } @else {
+      <div
+        role="img"
+        aria-label="No image available"
+        class="flex h-full w-full items-center justify-center rounded-sm bg-gray-100 text-sm text-gray-400"
+      >
+        No image
+      </div>
+    }
+  </div>
+
+  <div class="flex items-center justify-between gap-3 p-3">
+    <h2 class="min-w-0 truncate font-medium text-gray-900">
+      {{ product().title }}
+    </h2>
+    <span class="shrink-0 text-gray-700">{{ product().priceCents | money }}</span>
+  </div>
+
+  <div
+    class="px-3 pb-3"
+    [class.text-red-600]="product().stock === 0"
+    [class.text-green-600]="product().stock > 0"
+  >
+    In stock: {{ product().stock }}
+  </div>
+
+  <div class="mt-auto">
+    <ng-content />
+  </div>
+</article>

@@ -1,0 +1,43 @@
+<app-modal-shell title="Purchase successful" (closed)="onClose()">
+  <p class="text-sm font-semibold text-lime-600">Payment accepted. Enjoy your purchase!</p>
+
+  <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 flex items-center justify-between shadow-xs mt-4">
+    <div class="flex min-w-0 items-center gap-3">
+      @if (data.product.image && !imageFailed()) {
+      <img class="h-12 w-12 shrink-0 rounded-md bg-white object-contain" [src]="data.product.image"
+        [alt]="data.product.title" (error)="onImageError()" />
+      } @else {
+      <div role="img" aria-label="No image available"
+        class="flex h-12 w-12 shrink-0 items-center justify-center rounded-sm bg-gray-100 text-center text-xs text-gray-400">
+        No image
+      </div>
+      }
+      <span class="truncate font-bold text-slate-800">{{ data.product.title }}</span>
+    </div>
+    <span class="ml-3 shrink-0 font-black text-slate-900">{{
+      data.product.priceCents | money
+      }}</span>
+  </div>
+
+  <div class="flex items-center justify-between mt-4 mb-2">
+    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Your change</span>
+    <span class="text-xs font-semibold text-slate-700">{{ data.changeCents | money }}</span>
+  </div>
+
+  @if (changeCoins.length > 0) {
+  <div class="flex flex-wrap gap-2.5">
+    @for (item of changeCoins; track item.coin) {
+    <app-coin [label]="formatCoinLabel(item.coin)" [valueCents]="item.coin" [count]="item.count"
+      [isInteractive]="false" />
+    }
+  </div>
+  } @else {
+  <p class="text-sm text-slate-500">No change</p>
+  }
+
+  <div modal-footer class="w-full">
+    <button appButton type="button" variant="primary" customClass="w-full" (click)="onClose()">
+      Get purchase
+    </button>
+  </div>
+</app-modal-shell>

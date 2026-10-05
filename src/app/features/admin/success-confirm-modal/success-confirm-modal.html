@@ -1,0 +1,12 @@
+<app-modal-shell [title]="modalTitle" (closed)="onClose()">
+    <p class="text-sm font-semibold text-lime-600">
+        <span class="font-bold text-slate-800 break-words">{{ data.productTitle }}</span>
+        {{ message }}
+    </p>
+
+    <div modal-footer class="w-full">
+        <button appButton type="button" variant="primary" customClass="w-full" (click)="onClose()">
+            OK
+        </button>
+    </div>
+</app-modal-shell>

@@ -1,0 +1,33 @@
+<div
+  class="w-full bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden select-none"
+>
+  <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+    <h3 class="font-extrabold text-slate-800 text-sm uppercase tracking-wider">
+      {{ title() }}
+    </h3>
+
+    @if (showCloseButton()) {
+      <button
+        appButton
+        type="button"
+        variant="ghost"
+        size="icon"
+        aria-label="Close modal"
+        (click)="closed.emit()"
+      >
+        ✕
+      </button>
+    }
+  </div>
+
+  <div class="p-5">
+    <ng-content />
+  </div>
+
+  <!-- empty:hidden hides the footer when nothing is projected into the slot -->
+  <div
+    class="px-5 py-3 bg-slate-50 border-t border-slate-100 flex items-center justify-end gap-2 empty:hidden"
+  >
+    <ng-content select="[modal-footer]" />
+  </div>
+</div>

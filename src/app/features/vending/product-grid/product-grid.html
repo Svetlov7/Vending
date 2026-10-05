@@ -1,0 +1,7 @@
+<section class="mx-auto w-full max-w-[1400px] px-3 sm:px-4" aria-label="Products">
+  <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    @for (product of products(); track product.id) {
+      <app-vending-product-card [product]="product" (selected)="selectProduct(product)" />
+    }
+  </div>
+</section>

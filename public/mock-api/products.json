@@ -1,0 +1,12 @@
+{
+  "data": [
+    { "id": "prod-1", "title": "CocaCola", "priceCents": 180, "stock": 12, "image": "/assets/images/products/vending-cola.png" },
+    { "id": "prod-2", "title": "KitKat", "priceCents": 120, "stock": 7, "image": "/assets/images/products/vending-kit-kat.png" },
+    { "id": "prod-3", "title": "Chips", "priceCents": 250, "stock": 15, "image": "/assets/images/products/vending-chips.png" },
+    { "id": "prod-4", "title": "Oreo", "priceCents": 220, "stock": 4, "image": "/assets/images/products/vending-oreo.png" },
+    { "id": "prod-5", "title": "Sprite", "priceCents": 170, "stock": 9, "image": "/assets/images/products/vending-sprite.png" },
+    { "id": "prod-6", "title": "Water", "priceCents": 90, "stock": 14, "image": "/assets/images/products/vending-water.png" },
+    { "id": "prod-7", "title": "Coffee", "priceCents": 290, "stock": 6, "image": "/assets/images/products/vending-coffe.png" },
+    { "id": "prod-8", "title": "Kinder", "priceCents": 150, "stock": 11, "image": "/assets/images/products/vending-kinder.png" }
+  ]
+}

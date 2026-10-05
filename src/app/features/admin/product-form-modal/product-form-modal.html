@@ -1,0 +1,39 @@
+<form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+  <app-modal-shell [title]="modalTitle" (closed)="close()">
+    <div class="space-y-4">
+      <div>
+        <label for="product-title" class="mb-1 block text-xs font-bold uppercase tracking-wider text-slate-500">
+          Title
+        </label>
+        <input id="product-title" type="text" formControlName="title" [attr.maxlength]="titleMaxLength"
+          class="form-input" />
+        <app-form-field-error [control]="form.controls.title" [messages]="errors.title" />
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label for="product-price" class="mb-1 block text-xs font-bold uppercase tracking-wider text-slate-500">
+            Price (EUR)
+          </label>
+          <input id="product-price" appMoneyInput type="number" inputmode="decimal" step="0.1" formControlName="price"
+            class="form-input" />
+          <app-form-field-error [control]="form.controls.price" [messages]="errors.price" />
+        </div>
+
+        <div>
+          <label for="product-stock" class="mb-1 block text-xs font-bold uppercase tracking-wider text-slate-500">
+            Stock
+          </label>
+          <input id="product-stock" type="number" inputmode="numeric" step="1" formControlName="stock"
+            class="form-input" />
+          <app-form-field-error [control]="form.controls.stock" [messages]="errors.stock" />
+        </div>
+      </div>
+    </div>
+
+    <ng-container modal-footer>
+      <button appButton type="button" variant="secondary" (click)="close()">Cancel</button>
+      <button appButton type="submit" variant="primary" size="md">Save</button>
+    </ng-container>
+  </app-modal-shell>
+</form>

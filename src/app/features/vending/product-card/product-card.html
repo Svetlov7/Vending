@@ -1,0 +1,13 @@
+<app-product-card [product]="product()">
+  <div class="px-3 pb-3">
+    <div
+      aria-hidden="true"
+      class="w-full rounded-sm border border-transparent py-2 text-center font-medium"
+      [class]="
+        isDisabled() ? 'bg-gray-300 text-gray-500' : 'bg-lime-500 text-white group-hover:bg-lime-600'
+      "
+    >
+      Select
+    </div>
+  </div>
+</app-product-card>

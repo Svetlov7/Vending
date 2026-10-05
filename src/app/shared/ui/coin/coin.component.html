@@ -1,0 +1,16 @@
+<button
+  type="button"
+  [class]="classes()"
+  (click)="handleClick()"
+  [attr.disabled]="disabled() || !isInteractive() ? true : null"
+>
+  <span>{{ label() }}</span>
+
+  @if (showBadge()) {
+    <span
+      class="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-slate-900 text-[10px] font-bold text-white shadow-xs"
+    >
+      ×{{ count() }}
+    </span>
+  }
+</button>

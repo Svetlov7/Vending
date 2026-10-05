@@ -1,0 +1,46 @@
+<app-modal-shell title="Payment Process" (closed)="onClose()">
+  <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 flex items-center justify-between shadow-xs">
+    <div class="flex min-w-0 items-center gap-3">
+      @if (data.product.image && !imageFailed()) {
+      <img class="h-12 w-12 shrink-0 rounded-md bg-white object-contain" [src]="data.product.image"
+        [alt]="data.product.title" (error)="onImageError()" />
+      } @else {
+      <div role="img" aria-label="No image available"
+        class="flex h-12 w-12 shrink-0 items-center justify-center rounded-sm bg-gray-100 text-center text-xs text-gray-400">
+        No image
+      </div>
+      }
+      <span class="truncate font-bold text-slate-800">{{ data.product.title }}</span>
+    </div>
+    <span class="ml-3 shrink-0 font-black text-slate-900">{{ priceCents() | money }}</span>
+  </div>
+
+  <div class="bg-slate-900 text-white p-4 rounded-xl space-y-1 shadow-inner mt-4">
+    <div class="flex items-center justify-between">
+      <span class="text-xs text-slate-400 uppercase tracking-wider">Inserted Balance</span>
+      @if (isEnoughMoney()) {
+      <span class="text-lime-400 font-semibold text-xs">Change: {{ changeCents() | money }}</span>
+      } @else {
+      <span class="text-amber-400 font-semibold text-xs">Need +{{ remainingCents() | money }}</span>
+      }
+    </div>
+    <div class="text-3xl font-black tracking-tight">{{ insertedCents() | money }}</div>
+  </div>
+
+  <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2 mt-4">Insert Coins</span>
+  <div class="flex flex-wrap gap-3">
+    @for (coin of coins; track coin) {
+    <app-coin [label]="formatCoinLabel(coin)" [valueCents]="coin" [disabled]="isCoinDisabled()"
+      (clicked)="onInsertCoin(coin)" />
+    }
+  </div>
+
+  <div modal-footer class="w-full grid grid-cols-2 gap-2">
+    <button appButton type="button" variant="secondary" [disabled]="insertedCents() === 0" (click)="onReset()">
+      Reset
+    </button>
+    <button appButton type="button" variant="primary" [disabled]="!isEnoughMoney()" (click)="onConfirm()">
+      Confirm
+    </button>
+  </div>
+</app-modal-shell>

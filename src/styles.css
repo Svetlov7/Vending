@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss';
+@import '@angular/cdk/overlay-prebuilt.css';
+@import './styles/form.css';
+
+/* Height of the sticky app header in app.html; admin toolbar and scroll offsets depend on it. */
+:root {
+  --app-header-h: 4rem;
+}
+
+/* Replaces tw-animate-css's `animate-in fade-in zoom-in-95 duration-150` (not installed) */
+/* Tailwind CSS v4 theme utility configuration */
+@theme {
+  --font-sans: 'Inter', sans-serif;
+  --animate-modal-in: modal-in 150ms ease-out;
+  --animate-product-highlight: product-highlight 2s ease-out forwards;
+
+  @keyframes product-highlight {
+    0%,
+    60% {
+      box-shadow: 0 0 0 4px var(--color-lime-500);
+    }
+    100% {
+      box-shadow: 0 0 0 4px transparent;
+    }
+  }
+
+  @keyframes modal-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
